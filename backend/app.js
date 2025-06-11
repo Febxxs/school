@@ -1,4 +1,4 @@
-const userRouter = require("./routes/userRoute");
+const userRouter = require("./routes/categoryRoute");
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
