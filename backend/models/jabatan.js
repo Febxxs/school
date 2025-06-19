@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class category extends Model {
+  class jabatan extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,34 +11,39 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  category.init(
+  jabatan.init(
     {
-      name: {
+      jabatan_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      jabatan_name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: {
           args: true,
-          msg: "Nama category sudah digunakan, masukan category lain.",
+          msg: "Nama jabatan sudah digunakan, masukan jabatan lain.",
         },
         validate: {
           notNull: {
-            msg: "Inputan category tidak boleh kosong. ",
+            msg: "Inputan jabatan tidak boleh kosong.",
           },
         },
       },
-      description: DataTypes.TEXT,
     },
-
     {
-      // hook
+      sequelize,
+      modelName: "jabatan",
+      tableName: "jabatans",
+      timestamps: false, // <--- tambahkan ini
       hooks: {
-        afterValidate: (category, option) => {
-          category.name = category.name.toLowerCase();
+        afterValidate: (jabatan, options) => {
+          if (jabatan.jabatan_name)
+            jabatan.jabatan_name = jabatan.jabatan_name.toLowerCase();
         },
       },
-      sequelize,
-      modelName: "category",
     }
   );
-  return category;
+  return jabatan;
 };

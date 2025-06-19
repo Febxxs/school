@@ -1,4 +1,4 @@
-const userRouter = require("./routes/categoryRoute");
+const jabatanRoute = require("./routes/jabatanRoute");
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -12,7 +12,8 @@ app.use(morgan("dev"));
 app.use(cors());
 
 // router
-app.use("/api/v1", userRouter);
+app.use("/api/v1", jabatanRoute);
+
 // server
 const port = process.env.PORT;
 app.listen(port, () => {

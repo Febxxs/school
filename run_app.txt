@@ -1,0 +1,9 @@
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm:start-frontend\" \"npm:start-backend\"",
+    "start-frontend": "npm --workspace frontend run dev",
+    "start-backend": "npm --workspace backend run dev",
+    "build": "npm run build-frontend && npm run build-backend",
+    "build-frontend": "npm --workspace frontend run build",
+    "build-backend": "npm --workspace backend run build"
+  },
