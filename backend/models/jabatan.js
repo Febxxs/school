@@ -2,11 +2,6 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class jabatan extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       // define association here
     }
@@ -23,24 +18,25 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: {
           args: true,
-          msg: "Nama jabatan sudah digunakan, masukan jabatan lain.",
+          msg: "Nama jabatan sudah digunakan",
         },
         validate: {
-          notNull: {
-            msg: "Inputan jabatan tidak boleh kosong.",
-          },
+          notNull: { msg: "Inputan jabatan tidak boleh kosong." },
+          notEmpty: { msg: "Inputan jabatan tidak boleh kosong." },
         },
       },
+      description: DataTypes.TEXT,
     },
     {
       sequelize,
       modelName: "jabatan",
       tableName: "jabatans",
-      timestamps: false, // <--- tambahkan ini
+      timestamps: false,
       hooks: {
-        afterValidate: (jabatan, options) => {
-          if (jabatan.jabatan_name)
+        beforeValidate: (jabatan) => {
+          if (jabatan.jabatan_name) {
             jabatan.jabatan_name = jabatan.jabatan_name.toLowerCase();
+          }
         },
       },
     }

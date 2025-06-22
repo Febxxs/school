@@ -12,6 +12,9 @@ module.exports = {
       jabatan_name: {
         type: Sequelize.STRING,
       },
+      description: {
+        type: Sequelize.STRING,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
